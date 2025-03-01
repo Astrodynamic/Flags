@@ -1,9 +1,13 @@
-#include "enum.h"
-
-#include <iostream>
-
 namespace utils {
-template <typename Enum> auto Flags<Enum>::operator[](Enum value) const -> const typename Flags<Enum>::reference {
+template <typename Enum> auto Flags<Enum>::operator==(const Flags& other) -> bool {
+  return base::operator==(other);
+}
+
+template <typename Enum> auto Flags<Enum>::operator!=(const Flags& other) -> bool {
+  return !(*this == other);
+}
+
+template <typename Enum> auto Flags<Enum>::operator[](Enum value) const -> bool {
   return base::operator[](static_cast<std::size_t>(value));
 }
 
@@ -12,44 +16,27 @@ template <typename Enum> auto Flags<Enum>::operator[](Enum value) -> typename Fl
 }
 
 template <typename Enum> auto Flags<Enum>::set() -> Flags& {
-  base::set();
-  return *this;
+  return static_cast<Flags&>(base::set());
 }
 
 template <typename Enum> auto Flags<Enum>::set(Enum position, bool value) -> Flags& {
-  base::set(static_cast<std::size_t>(position), value);
-  return *this;
+  return static_cast<Flags&>(base::set(static_cast<std::size_t>(position), value));
 }
 
 template <typename Enum> auto Flags<Enum>::reset() -> Flags& {
-  base::reset();
-  return *this;
+  return static_cast<Flags&>(base::reset());
 }
 
 template <typename Enum> auto Flags<Enum>::reset(Enum position) -> Flags& {
-  base::reset(static_cast<std::size_t>(position));
-  return *this;
+  return static_cast<Flags&>(base::reset(static_cast<std::size_t>(position)));
 }
 
 template <typename Enum> auto Flags<Enum>::flip() -> Flags& {
-  base::flip();
-  return *this;
+  return static_cast<Flags&>(base::flip());
 }
 
 template <typename Enum> auto Flags<Enum>::flip(Enum position) -> Flags& {
-  base::flip(static_cast<std::size_t>(position));
-  return *this;
+  return static_cast<Flags&>(base::flip(static_cast<std::size_t>(position)));
 }
 
 } // namespace utils
-
-template <typename Enum> 
-auto operator<<(std::ostream& os, const utils::Flags<Enum>& flags) -> std::ostream& {
-  os << "Seted {\n";
-  for (std::size_t i{}; i < static_cast<std::size_t>(Enum::Count); ++i) {
-    if (flags[i]) {
-      os << ' ' << enums::Meta<Enum>::name << "::" << enums::Meta<Enum>::description[i] << '\n';
-    }
-  }
-  return os << "}\n";
-}
