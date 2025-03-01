@@ -1,18 +1,18 @@
-Библиотека `Flags` предоставляет удобный способ работы с битовыми флагами, используя перечисления (enum) в качестве индексов. Она основана на `std::bitset` и предоставляет интерфейс, адаптированный для работы с перечислениями.
+The `Flags` library provides a convenient way to work with bit flags using enums as indexes. It is based on `std::bitset` and provides an interface adapted for working with enums.
 
-## Требования
+## Requirements
 
 *   C++17
-*   CMake 3.28.3 или выше
+*   CMake 3.28.3 or higher
 
-## Использование
+## Usage
 
-Для использования библиотеки необходимо включить заголовочный файл `flags.h`.
+To use the library, the `flags.h` header file must be included.
 ```cpp
 #include "flags.h"
 ```
 
-## Пример
+## Example
 
 ```cpp
 enum class MyFlags {
@@ -32,9 +32,9 @@ if (flags[MyFlags::Flag1]) {
 }
 ```
 
-## Сборка
+## Build
 
-Для сборки библиотеки используется CMake.
+CMake is used to build the library.
 
 ```bash
 cmake -S . -B build
