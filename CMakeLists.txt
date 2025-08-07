@@ -26,3 +26,23 @@ target_compile_options(
   -Wextra
   -Wpedantic
 )
+
+# Example executable
+add_executable(flags_example
+  examples/usage.cpp
+)
+
+target_link_libraries(flags_example
+  PRIVATE
+  ${PROJECT_NAME}
+)
+
+target_compile_features(flags_example PRIVATE cxx_std_17)
+
+target_compile_options(flags_example
+  PRIVATE
+  -Wall
+  -Werror
+  -Wextra
+  -Wpedantic
+)
